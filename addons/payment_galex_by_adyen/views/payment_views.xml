@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<galex>
+    <data>
+
+        <record id="acquirer_form_galex_by_adyen" model="ir.ui.view">
+            <field name="name">acquirer.form.galex.by.adyen</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="acquirer"]' position='inside'>
+                    <group attrs="{'invisible': [('provider', '!=', 'galex_adyen')]}">
+                        <button name="galex_adyen_create_account" icon="fa-arrow-right" type="object" class="btn-link" string="Create an account in 1 minute"
+                            attrs="{'invisible': [('galex_adyen_account_id', '!=', False)]}"/>
+                        <field name="galex_adyen_account_id" readonly="1" attrs="{'invisible': [('galex_adyen_account_id', '=', False)]}"/>
+                        <field name="galex_adyen_payout_id" attrs="{'invisible': [('galex_adyen_account_id', '=', False)], 'required':[('provider', '=', 'galex_adyen'), ('state', '!=', 'disabled')]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</galex>

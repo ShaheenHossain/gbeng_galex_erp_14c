@@ -1,0 +1,2 @@
+debian/galex.conf /etc/galex
+README.md /usr/share/doc/galex

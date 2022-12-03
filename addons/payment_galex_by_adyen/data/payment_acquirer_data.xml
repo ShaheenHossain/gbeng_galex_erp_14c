@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<galex>
+    <data noupdate="1">
+
+        <record id="payment.payment_acquirer_galex_by_adyen" model="payment.acquirer">
+            <field name="name">GalexERP Payments by Adyen</field>
+            <field name="image_128" type="base64" file="payment_galex_by_adyen/static/src/img/galex_icon.png"/>
+            <field name="provider">galex_adyen</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="view_template_id" ref="galex_by_adyen_form"/>
+        </record>
+
+    </data>
+</galex>

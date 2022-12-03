@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+GALEX_LIB_DIR=/var/lib/galex
+GALEX_USER="galex"
+GALEX_GROUP="galex"
+
+case "${1}" in
+    remove)
+        deluser --quiet --system $GALEX_USER || true
+        delgroup --quiet --system --only-if-empty $GALEX_GROUP || true
+        ;;
+
+    purge)
+        if [ -d "$GALEX_LIB_DIR" ]; then
+            rm -rf $GALEX_LIB_DIR
+        fi
+        ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        ;;
+
+esac
+
+#DEBHELPER#
+
+exit 0

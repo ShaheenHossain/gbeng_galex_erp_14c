@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<galex>
+    <record id="base.main_company" model="res.company">
+        <field name="social_twitter">https://twitter.com/GalexERP</field>
+        <field name="social_facebook">https://www.facebook.com/GalexERP</field>
+        <field name="social_linkedin">https://www.linkedin.com/company/galex</field>
+        <field name="social_youtube">https://www.youtube.com/user/GalexERPonline</field>
+        <field name="social_github">https://github.com/galex</field>
+        <field name="social_instagram">https://www.instagram.com/explore/tags/galex/</field>
+    </record>
+</galex>

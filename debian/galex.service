@@ -1,0 +1,14 @@
+[Unit]
+Description=GalexERP Open Source ERP and CRM
+After=network.target
+
+[Service]
+Type=simple
+User=galex
+Group=galex
+ExecStart=/usr/bin/galex --config /etc/galex/galex.conf --logfile /var/log/galex/galex-server.log
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+

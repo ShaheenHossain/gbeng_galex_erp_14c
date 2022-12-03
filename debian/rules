@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+export DH_VERBOSE=1
+export PYBUILD_NAME=galex-bin
+export PYBUILD_DISABLE=test
+
+%:
+	dh ${@} --with=python3 --buildsystem=pybuild
+
+override_dh_auto_build:
+	cp -r addons/* galex/addons/
+	dh_auto_build
+
+override_dh_auto_install:
+	dh_auto_install
+	rm debian/galex/usr/lib/python3*/dist-packages/galex/addons/point_of_sale/static/src/fonts/Inconsolata.otf
+	for LINKTARGET in `awk '{ print $2 }' galex.links`; do rm debian/galex/${LINKTARGET} ; done
+	find debian/galex -name LICENSE.txt -exec rm {} \;
+
+override_dh_auto_clean:
+	dh_auto_clean
+	for d in addons/* ; do rm -fr galex/$$d ; done

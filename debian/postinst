@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+GALEX_CONFIGURATION_FILE=/etc/galex/galex.conf
+GALEX_GROUP="galex"
+GALEX_DATA_DIR=/var/lib/galex
+GALEX_LOG_DIR=/var/log/galex
+GALEX_USER="galex"
+
+case "${1}" in
+    configure)
+        if ! getent passwd | grep -q "^galex:"; then
+            adduser --system --home $GALEX_DATA_DIR --quiet --group $GALEX_USER
+        fi
+        # Register "$GALEX_USER" as a postgres user with "Create DB" role attribute
+        su - postgres -c "createuser -d -R -S $GALEX_USER" 2> /dev/null || true
+        # Configuration file
+        chown $GALEX_USER:$GALEX_GROUP $GALEX_CONFIGURATION_FILE
+        chmod 0640 $GALEX_CONFIGURATION_FILE
+        # Log
+        mkdir -p $GALEX_LOG_DIR
+        chown $GALEX_USER:$GALEX_GROUP $GALEX_LOG_DIR
+        chmod 0750 $GALEX_LOG_DIR
+        # Data dir
+        chown $GALEX_USER:$GALEX_GROUP $GALEX_DATA_DIR
+        ;;
+    *)
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

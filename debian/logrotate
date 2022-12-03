@@ -1,0 +1,5 @@
+/var/log/galex/*.log {
+    copytruncate
+    missingok
+    notifempty
+}
